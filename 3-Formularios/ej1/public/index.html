@@ -14,7 +14,12 @@
         .then((data) => {
           let parrafo = "";
           for (let i = 0; i < data.length; i++) {
-            parrafo += `<li>${data[i].nombre}</li>`;
+            parrafo += `<li>${data[i].nombre}: 
+            <form action="/adoptar">
+            <input name="nombre" type="hidden" value="${data[i].nombre}" />
+            <button type="subtmit">Adoptar</button>
+            </form>
+            </li>`;
           }
           document.getElementById("lista").innerHTML = `<ul>${parrafo}</ul>`;
         });

@@ -28,4 +28,16 @@ app.get("/dejar-animal", (req, res) => {
 </form>`);
 });
 
+app.get("/adoptar", (req, res) => {
+  console.log(req.query.nombre);
+  for (let i = 0; i < animales.length; i++) {
+    if (animales[i].nombre === req.query.nombre) {
+      animales.splice(i, 1);
+      res.send("<h3>Animal adoptado</h3>");
+      break;
+    }
+  }
+  res.send("<h3>No se ha encontrado ese animal</h3>");
+});
+
 app.listen(process.env.PORT || 3000);
