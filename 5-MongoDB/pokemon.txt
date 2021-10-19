@@ -1,0 +1,8 @@
+db.samples__pokemon.find({num: "132"})
+
+db.samples__pokemon.find({type: "Poison"})
+
+db.samples__pokemon.find({avg_spawns: 4.2})
+
+db.samples__pokemon.find({$and:[{candy_count: {$gte: 20}},{candy_count: {$lte: 40}}]})
+
