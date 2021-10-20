@@ -10,7 +10,7 @@ MongoClient.connect("mongodb://localhost:27017", function (err, client) {
   err
     ? (console.log("🔴 MongoDB no conectado"), console.log(`error: ${err}`))
     : ((app.locals.db = client.db("pruebas")),
-      console.log("🟢 MongoDB conectado"));
+      console.log("🟢 MongoDB está conectado"));
 });
 
 app.use(express.urlencoded({ extended: false }));
