@@ -7,7 +7,11 @@ router.post("/crear", (req, res) => {
     .find({ dni: req.body.dni })
     .toArray(function (err, datos) {
       if (err) {
-        res.send({ error: true, data: datos, mensaje: err });
+        res.send({
+          error: true,
+          data: err,
+          mensaje: "Consulta fallida a la BBDD.",
+        });
       } else {
         if (datos.length > 0) {
           res.send({
@@ -24,9 +28,37 @@ router.post("/crear", (req, res) => {
                 : res.send({
                     error: false,
                     data: datos1,
-                    mensaje: "Respuesta OK",
+                    mensaje: "Cliente creado correctamente",
                   });
             });
+        }
+      }
+    });
+});
+
+router.put("/modificar", (req, res) => {
+  req.app.locals.db
+    .collection("clientes")
+    .updateOne({ dni: req.body.dni }, { $set: req.body }, (err, data) => {
+      if (err) {
+        res.send({
+          error: true,
+          data: err,
+          mensaje: "Ha fallado la consulta",
+        });
+      } else {
+        if (data.modifiedCount > 0) {
+          res.send({
+            error: false,
+            data: data,
+            mensaje: "Cliente actualizado correctamente",
+          });
+        } else {
+          res.send({
+            error: true,
+            data: data,
+            mensaje: "No se ha modificado el cliente",
+          });
         }
       }
     });
